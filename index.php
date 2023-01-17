@@ -1,3 +1,8 @@
+<?php 
+session_start();
+require_once 'fonctions/bdd.php';
+?>
+
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +15,6 @@
   <body>
     <h1>Jeu de stratégie en ligne</h1>
     <p>Bienvenue</p>
-
         <!--Ajout de la barre de navigation -->
         <nav>
             <ul>
@@ -23,7 +27,6 @@
               <li><a href="http://cazabetremy.fr/wiki/doku.php?id=projet:presentation#enseignants">Page web de l'UE</a></li>
             </ul>
           </nav>
-
           <div class="frame">
             <p>Contenu du cadre</p>
           </div>
