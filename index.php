@@ -1,6 +1,22 @@
 <?php 
 session_start();
 require_once 'fonctions/bdd.php';
+
+$query="select VersetFr from coran";
+$resultat=executeQuery($link,$query);
+
+
+/*
+if (mysqli_num_rows($resultat) > 0) {
+  // output data of each row
+  while($row = mysqli_fetch_assoc($resultat)) {
+      echo "le verset: " . $row["VersetFr"]. "<br>";
+  }
+} else {
+  echo "0 resultats";
+}
+*/
+
 ?>
 
 
