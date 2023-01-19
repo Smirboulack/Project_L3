@@ -1,3 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ultimate LIFKIYA</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="script/scriptapp.js"></script>
+</head>
+<body>
+    <!--Ajout du menu de navigation -->
+    <?php include('static/menu.php'); ?>
+    <div id="test"><button type="btddntest" class="btn btn-primary" name="btddntest">Ceci est pour le test javascript</button></div>
+
+
+    <form id="form_insc" action="inscription.php" method="POST">
+        <div class="form-group">
+            <label for="username">Pseudonyme </label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="(entre 5 et 15 caractères)">
+        </div>
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="(Longueur minimal : 10 , au moins une majuscule et un chiffre)">
+        </div>
+        <div class="form-group">
+            <label for="passwordconfirm">Confirmation du mot de passe</label>
+            <input type="password" class="form-control" id="passwordconfirm" name="passwordconfirm">
+        </div>
+        <div class="form-group">
+            <label for="email">Adresse email </label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="(gmail,hotmail,outlook)">
+        </div>
+        <div class="form-group">
+            <label for="date_naiss">Votre date de naissance</label>
+            <input type="date" class="form-control" id="date" name="date">
+        </div>
+        <button type="submit" class="btn btn-primary" name="submit">Envoyer</button>
+        <div><p>Déjà inscrit ? <a href="connexion.php">Connexion</a></p></div>
+    </form>
+
+    
+
+
+</body>
+</html>
+
+
 <?php
 session_start();
 require_once 'modeles/modele.php';
@@ -31,11 +77,11 @@ if (isset($_POST["submit"])) {
     if (strlen($password) < 10) {
         $errors[] = 'Le mot de passe doit contenir au moins 10 caractères';
     }
-/*
+
     if (!preg_match('/[A-Z]/', $password)) {
         $errors[] = 'Le mot de passe doit contenir au moins une majuscule';
     }
-*/
+
     if (!preg_match('/[0-9]/', $password)) {
         $errors[] = 'Le mot de passe doit contenir au moins un chiffre';
     }
@@ -67,50 +113,3 @@ if (isset($_POST["submit"])) {
     }
 }
 ?>
-
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Ultimate LIFKIYA</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <script type="text/javascript" src="script/script.js"></script>
-</head>
-
-<body>
-
-    <!--Ajout du menu de navigation -->
-    <?php include('static/menu.php'); ?>
-    
-    <form action="login.php" method="post">
-        <div class="form-group">
-            <label for="username">Pseudonyme (entre 5 et 15 caractères) </label>
-            <input type="text" class="form-control" id="username" name="username">
-        </div>
-        <div class="form-group">
-            <label for="password">Mot de passe (Longueur minimal : 10 , au moins une majuscule et un chiffre)</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
-        <div class="form-group">
-            <label for="passwordconfirm">Confirmation du mot de passe</label>
-            <input type="password" class="form-control" id="passwordconfirm" name="passwordconfirm">
-        </div>
-        <div class="form-group">
-            <label for="email">Adresse email (gmail,hotmail,outlook)</label>
-            <input type="text" class="form-control" id="email" name="email">
-        </div>
-        <div class="form-group">
-            <label for="date_naiss">Votre date de naissance</label>
-            <input type="date" class="form-control" id="date" name="date">
-        </div>
-        <button type="submit" class="btn btn-primary" name="submit">Envoyer</button>
-        <div><p>Déjà inscrit ? <a href="login.php">Connexion</a></p></div>
-    </form>
-    
-
-
-</body>
-
-</html>

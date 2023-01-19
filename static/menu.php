@@ -5,7 +5,8 @@
       <li><a href="about.php">Qui sommes-nous</a></li>
       <li><a href="regles.php">Comment jouer ?</a></li>
       <li><a href="legal.php">Mentions légales</a></li>
-      <li><a href="login.php">Connexion/Inscription</a></li>
+      <li><a href="Connexion.php">Connexion</a></li>
+      <li><a href="inscription.php">Inscription</a></li>
       <li><a href="http://cazabetremy.fr/wiki/doku.php?id=projet:presentation#enseignants" target="_blank">Page web de l'UE</a></li>
     </ul>
   </nav>

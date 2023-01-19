@@ -20,7 +20,7 @@ require('modeles/modele.php');  /* ... la définition du modèle */
   <title>Ultimate LIFKIYA</title>
   <meta charset="utf-8" />
   <link rel="stylesheet" type="text/css" href="css/style.css" />
-  <script type="text/javascript" src="script/script.js"></script>
+  <script type="text/javascript" src="script/scriptapp.js"></script>
 </head>
 <body>
   <!--Ajout du menu de navigation -->
