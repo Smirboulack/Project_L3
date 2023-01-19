@@ -1,0 +1,59 @@
+<?php 
+////////////////////////////////////////////////////////////////////////
+///////    Gestion de la connxeion   ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+use LDAP\Result;
+
+/**
+ * Initialise la connexion à la base de données courante (spécifiée selon constante 
+	globale SERVEUR, UTILISATEUR, MOTDEPASSE, BDD)			
+ */
+function open_connection_DB() {
+	global $connexion;
+
+	$connexion = mysqli_connect(SERVEUR, UTILISATEUR, MOTDEPASSE, BDD);
+	if (mysqli_connect_errno()) {
+	    printf("Échec de la connexion : %s\n", mysqli_connect_error());
+	    exit();
+	}
+}
+
+/**
+ *  	Ferme la connexion courante
+ * */
+function close_connection_DB() {
+	global $connexion;
+
+	mysqli_close($connexion);
+}
+
+
+function convertir_type( $code ){
+	switch( $code ){
+		case 1 : return 'BOOL/TINYINT';
+		case 2 : return 'SMALLINT';
+		case 3 : return 'INTEGER';
+		case 4 : return 'FLOAT';
+		case 5 : return 'DOUBLE';
+		case 7 : return 'TIMESTAMP';
+		case 8 : return 'BIGINT/SERIAL';
+		case 9 : return 'MEDIUMINT';
+		case 10 : return 'DATE';
+		case 11 : return 'TIME';
+		case 12 : return 'DATETIME';
+		case 13 : return 'YEAR';
+		case 16 : return 'BIT';
+		case 246 : return 'DECIMAL/NUMERIC/FIXED';
+		case 252 : return 'BLOB/TEXT';
+		case 253 : return 'VARCHAR/VARBINARY';
+		case 254 : return 'CHAR/SET/ENUM/BINARY';
+		default : return '?';
+	}
+
+}
+
+
+
+
+?>
