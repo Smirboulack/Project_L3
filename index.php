@@ -10,7 +10,6 @@ error_reporting(E_ALL);
 require('includes/bdd.php');  /* ... la configuration de connexion à la base de données */
 require('includes/includes.php');   /* ... les constantes et variables globales */
 require('modeles/modele.php');  /* ... la définition du modèle */
-
 ?>
 
 
@@ -30,16 +29,8 @@ require('modeles/modele.php');  /* ... la définition du modèle */
   <h2>Jeu de Dames</h2>
   <table id="tab_jeux">
   <tr>
-    <td class="white"></td>
     <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
     <td class="white"></td>
-    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
-    <td class="white"></td>
-    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
-    <td class="white"></td>
-    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
-  </tr>
-  <tr>
     <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
     <td class="white"></td>
     <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
@@ -58,6 +49,32 @@ require('modeles/modele.php');  /* ... la définition du modèle */
     <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
     <td class="white"></td>
     <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
+  </tr>
+  <tr>
+    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
+    <td class="white"></td>
+  </tr>
+  <tr>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/rouge.png" /></td>
   </tr>
   <tr>
     <td class="black"></td>
@@ -68,6 +85,8 @@ require('modeles/modele.php');  /* ... la définition du modèle */
     <td class="white"></td>
     <td class="black"></td>
     <td class="white"></td>
+    <td class="black"></td>
+    <td class="white"></td>
   </tr>
   <tr>
     <td class="white"></td>
@@ -78,6 +97,8 @@ require('modeles/modele.php');  /* ... la définition du modèle */
     <td class="black"></td>
     <td class="white"></td>
     <td class="black"></td>
+    <td class="white"></td>
+    <td class="black"></td>
   </tr>
   <tr>
     <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
@@ -88,6 +109,8 @@ require('modeles/modele.php');  /* ... la définition du modèle */
     <td class="white"></td>
     <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
     <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
+    <td class="white"></td>
   </tr>
   <tr>
     <td class="white"></td>
@@ -98,6 +121,8 @@ require('modeles/modele.php');  /* ... la définition du modèle */
     <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
     <td class="white"></td>
     <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
   </tr>
   <tr>
     <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
@@ -108,11 +133,22 @@ require('modeles/modele.php');  /* ... la définition du modèle */
     <td class="white"></td>
     <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
     <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
+    <td class="white"></td>
+  </tr>
+  <tr>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
+    <td class="white"></td>
+    <td class="black"><img class="img_dames" src="images/bleu.png" /></td>
   </tr>
 </table>
-
-
-
 </body>
 
 </html>

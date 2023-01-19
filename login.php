@@ -1,15 +1,19 @@
 <?php
 session_start();
+require_once 'modeles/modele.php';
+require_once 'includes/includes.php';
+require_once 'includes/bdd.php';
 
 
 if (isset($_POST["submit"])) {
 
     $username = $_POST['username'];
     $password = md5($_POST['password']);
-    $passwordconfirm = $_POST['passwordconfirm'];
+    $passwordconfirm = md5($_POST['passwordconfirm']);
     $email = $_POST['email'];
     $date = $_POST['date'];
-
+    $connexion = mysqli_connect(SERVEUR, UTILISATEUR, MOTDEPASSE, BDD);
+    
     $errors = array();
 
     if (empty($username) || empty($password) || empty($passwordconfirm) || empty($email) || empty($date)) {
@@ -20,14 +24,18 @@ if (isset($_POST["submit"])) {
         $errors[] = 'Le pseudonyme doit être compris entre 5 et 15 caractères';
     }
 
+    if(checkAvailability($username,$connexion)==0){
+        $errors[] = 'Le pseudonyme est déjà utilisee';
+    }
+
     if (strlen($password) < 10) {
         $errors[] = 'Le mot de passe doit contenir au moins 10 caractères';
     }
-
+/*
     if (!preg_match('/[A-Z]/', $password)) {
         $errors[] = 'Le mot de passe doit contenir au moins une majuscule';
     }
-
+*/
     if (!preg_match('/[0-9]/', $password)) {
         $errors[] = 'Le mot de passe doit contenir au moins un chiffre';
     }
@@ -46,9 +54,9 @@ if (isset($_POST["submit"])) {
 
     if (empty($errors)) {
         // Enregistrement de l'utilisateur
-        open_connection_DB();
-        $requete="INSERT INTO utilisateurs (id_u, pseudo_u, mot_de_passe, email, date_naiss) VALUES ('$id', '$pseudo', '$password', '$email', '$date_naiss')";
-
+       // open_connection_DB();
+        $requete="INSERT INTO utilisateurs (pseudo_u, mot_de_passe, email, date_naiss) VALUES ('$username', '$password', '$email', '$date')";
+        executeQuery($connexion,$requete);
     }
     else {
         echo '<ul>';

@@ -63,7 +63,7 @@ function convertir_type( $code ){
 
 function checkAvailability($pseudo, $link)
 {
-	$query = "SELECT pseudo FROM USERS WHERE pseudo = '". $pseudo ."';";
+	$query = "SELECT pseudo_u FROM utilisateurs WHERE pseudo_u = '". $pseudo ."';";
 	$result = executeQuery($link, $query);
 	return mysqli_num_rows($result) == 0;
 }
