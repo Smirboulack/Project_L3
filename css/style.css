@@ -28,7 +28,7 @@ nav a:hover {
 }
 
 
-table {
+#tab_jeux {
   border-collapse: collapse;
   margin: 10% auto;
 }
@@ -49,7 +49,7 @@ td {
 }
 
 
-img {
+.img_dames {
   width: 36px;
   height: 36px;
   position: absolute;
