@@ -7,7 +7,7 @@ use LDAP\Result;
 
 /**
  * Initialise la connexion à la base de données courante (spécifiée selon constante 
-	globale SERVEUR, UTILISATEUR, MOTDEPASSE, BDD)			
+	globale SERVEUR, UTILISATEUR, MOTDEPASSE, BDD)
  */
 function open_connection_DB() {
 	global $connexion;
@@ -24,7 +24,6 @@ function open_connection_DB() {
  * */
 function close_connection_DB() {
 	global $connexion;
-
 	mysqli_close($connexion);
 }
 
@@ -68,19 +67,9 @@ function checkAvailability($pseudo, $link)
 	return mysqli_num_rows($result) == 0;
 }
 
-/*Cette fonction prend en entrée un pseudo et un mot de passe, associe une couleur aléatoire dans le tableau de taille fixe  
-array('red', 'green', 'blue', 'black', 'yellow', 'orange') et enregistre le nouvel utilisateur dans la relation utilisateur via la connexion*/
-function register($pseudo, $hashPwd, $link)
-{
-	$colors = array('green', 'blue', 'purple', 'yellow', 'orange');
-	$index = rand(0, 5);
-	$color = $colors[$index];
-	$type = "Utilisateur";
-	$query = "INSERT INTO USERS VALUES('.$pseudo.','.$hashPwd.','.$color.','.$type.','disconnected')";
-	executeUpdate($link, $query);
+function checkuserconform($pseudo_email,$link){
+
+	
 }
-
-
-
 
 ?>

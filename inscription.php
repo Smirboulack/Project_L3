@@ -1,25 +1,33 @@
+<?php
+session_start();
+require_once 'modeles/modele.php';
+require_once 'includes/includes.php';
+require_once 'includes/bdd.php';
+?>
+
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Ultimate LIFKIYA</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <script type="text/javascript" src="script/scriptapp.js"></script>
 </head>
+
 <body>
     <!--Ajout du menu de navigation -->
     <?php include('static/menu.php'); ?>
-    <div id="test"><button type="btddntest" class="btn btn-primary" name="btddntest">Ceci est pour le test javascript</button></div>
-
-
     <form id="form_insc" action="inscription.php" method="POST">
         <div class="form-group">
             <label for="username">Pseudonyme </label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="(entre 5 et 15 caractères)">
+            <input type="text" class="form-control" id="username" name="username"
+                placeholder="(entre 5 et 15 caractères)">
         </div>
         <div class="form-group">
             <label for="password">Mot de passe</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="(Longueur minimal : 10 , au moins une majuscule et un chiffre)">
+            <input type="password" class="form-control" id="password" name="password"
+                placeholder="(Longueur minimal : 10 , au moins une majuscule et un chiffre)">
         </div>
         <div class="form-group">
             <label for="passwordconfirm">Confirmation du mot de passe</label>
@@ -34,23 +42,18 @@
             <input type="date" class="form-control" id="date" name="date">
         </div>
         <button type="submit" class="btn btn-primary" name="submit">Envoyer</button>
-        <div><p>Déjà inscrit ? <a href="connexion.php">Connexion</a></p></div>
+        <div>
+            <p>Déjà inscrit ? <a href="connexion.php">Connexion</a></p>
+        </div>
     </form>
 
-    
-
-
+    <script type="text/javascript" src="script/scriptapp.js"></script>
 </body>
+
 </html>
 
 
 <?php
-session_start();
-require_once 'modeles/modele.php';
-require_once 'includes/includes.php';
-require_once 'includes/bdd.php';
-
-
 if (isset($_POST["submit"])) {
 
     $username = $_POST['username'];
@@ -58,8 +61,13 @@ if (isset($_POST["submit"])) {
     $passwordconfirm = md5($_POST['passwordconfirm']);
     $email = $_POST['email'];
     $date = $_POST['date'];
+
+    $mail_autoriser = array('outlook.com', 'gmail.com', 'hotmail.com', 'hotmail.fr', 'outlook.fr');
+    $domain = strtolower(substr($email, strrpos($email, '@') + 1));
+
+
     $connexion = mysqli_connect(SERVEUR, UTILISATEUR, MOTDEPASSE, BDD);
-    
+
     $errors = array();
 
     if (empty($username) || empty($password) || empty($passwordconfirm) || empty($email) || empty($date)) {
@@ -70,17 +78,18 @@ if (isset($_POST["submit"])) {
         $errors[] = 'Le pseudonyme doit être compris entre 5 et 15 caractères';
     }
 
-    if(checkAvailability($username,$connexion)==0){
+    if (checkAvailability($username, $connexion) == 0) {
         $errors[] = 'Le pseudonyme est déjà utilisee';
     }
 
     if (strlen($password) < 10) {
         $errors[] = 'Le mot de passe doit contenir au moins 10 caractères';
     }
-
+    /*
     if (!preg_match('/[A-Z]/', $password)) {
-        $errors[] = 'Le mot de passe doit contenir au moins une majuscule';
+    $errors[] = 'Le mot de passe doit contenir au moins une majuscule';
     }
+    */
 
     if (!preg_match('/[0-9]/', $password)) {
         $errors[] = 'Le mot de passe doit contenir au moins un chiffre';
@@ -90,7 +99,7 @@ if (isset($_POST["submit"])) {
         $errors[] = 'Les mots de passe ne sont pas identiques';
     }
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!in_array($domain, $mail_autoriser)) {
         $errors[] = 'L\'adresse email n\'est pas valide';
     }
 
@@ -100,11 +109,10 @@ if (isset($_POST["submit"])) {
 
     if (empty($errors)) {
         // Enregistrement de l'utilisateur
-       // open_connection_DB();
-        $requete="INSERT INTO utilisateurs (pseudo_u, mot_de_passe, email, date_naiss) VALUES ('$username', '$password', '$email', '$date')";
-        executeQuery($connexion,$requete);
-    }
-    else {
+        // open_connection_DB();
+        $requete = "INSERT INTO utilisateurs (pseudo_u, mot_de_passe, email, date_naiss) VALUES ('$username', '$password', '$email', '$date')";
+        executeQuery($connexion, $requete);
+    } else {
         echo '<ul>';
         foreach ($errors as $error) {
             echo '<li>' . $error . '</li>';

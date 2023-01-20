@@ -27,6 +27,17 @@ nav a:hover {
   background-color: #000;
 }
 
+select {
+  background-color: #4CAF50;
+  font-family: arial;
+  padding: 8px;
+  color: #FFF;
+  text-decoration: none;
+}
+
+select:hover {
+  background-color: #000;
+}
 
 #tab_jeux {
   border-collapse: collapse;
@@ -38,6 +49,10 @@ td {
   width: 40px;
   height: 40px;
   position: relative;
+}
+
+#pions:hover{
+  background-color: purple;
 }
 
 .black {

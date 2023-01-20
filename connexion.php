@@ -20,7 +20,7 @@ $etatCo;
     <?php include('static/menu.php');?>
     <form id="form_insc" action="connexion.php" method="POST">
         <div class="form-group">
-            <label for="username">Pseudonyme </label>
+            <label for="username">Pseudonyme ou e-mail </label>
             <input type="text" class="form-control" id="username" name="username" placeholder="(entre 5 et 15 caractères)">
         </div>
         <div class="form-group">
@@ -30,6 +30,7 @@ $etatCo;
         <button type="submit" class="btn btn-primary" name="connect">Se connecter</button>
         <div>
             <p>Mot de passe oublié ? <a href="reinitialisation.php">Réinitialiser votre mot de passe</a></p>
+            <p>Créer un compte ? <a href="inscription.php">inscription</a></p>
         </div>
     </form>
 </body>
@@ -44,15 +45,19 @@ require_once 'includes/bdd.php';
 
 if (isset($_POST['connect'])) {
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
+    $email = $_POST['username'];
     $connexion = mysqli_connect(SERVEUR, UTILISATEUR, MOTDEPASSE, BDD);
 
-    $requete = "SELECT id_u FROM utilisateurs WHERE mot_de_passe = '$password' AND pseudo_u = '$username';";
+    $requete = "SELECT id_u FROM utilisateurs WHERE mot_de_passe = '$password' OR email='$email' AND pseudo_u = '$username';";
     $nbRes = mysqli_num_rows(executeQuery($connexion, $requete));
-    if($nbRes == 1) 
+    if($nbRes == 1)
     {
         $etatCo = true; 
+        echo '<li>'."vous êtes connecté".'</li>';
+    } else {
+        $etatCo = false;
+        echo '<li>'."vous n'êtes pas connecté".'</li>';
     }
-    else $etatCo = false;
 }
 ?>
