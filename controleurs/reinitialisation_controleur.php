@@ -1,5 +1,4 @@
 <?php
-$etatCo;
 
 if (isset($_POST['reinit'])) {
     $connexion = mysqli_connect(SERVEUR, UTILISATEUR, MOTDEPASSE, BDD);

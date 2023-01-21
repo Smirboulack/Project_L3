@@ -11,10 +11,8 @@ if (isset($_POST['connect'])) {
     $nbRes = mysqli_num_rows(executeQuery($connexion, $requete));
     if ($nbRes == 1) {
         $etatCo = true;
-        echo '<li id="connex_ok">'.'</li>';
-        echo '<script type="text/javascript">
-        temps_de_connexion();
-        </script>';
+        $_SESSION['logged'] = $username;
+        header('Location: index.php');
     } else {
         $etatCo = false;
         echo '<li>' . "vous n'êtes pas connecté" . '</li>';

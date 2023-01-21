@@ -10,10 +10,15 @@
       <li><a href="index.php?page=about">Qui sommes-nous</a></li>
       <li><a href="index.php?page=regles">Comment jouer ?</a></li>
       <li><a href="index.php?page=legal">Mentions légales</a></li>
-      <li><a href="index.php?page=Connexion">Connexion</a></li>
-      <li><a href="index.php?page=inscription">Inscription</a></li>
       <li><a href="http://cazabetremy.fr/wiki/doku.php?id=projet:presentation#enseignants" target="_blank">Page web de
           l'UE</a></li>
+      <?php if (!isset($_SESSION["logged"])) {
+        echo '<li><a href="index.php?page=Connexion">Connexion</a></li>' .
+          '<li><a href="index.php?page=inscription">Inscription</a></li>';
+      } else {
+        echo '<li><form method="POST"><input style="background-color:red;" type="submit" value="Se déconnecter" name="déconnexion""/></form></li>';
+      }
+      ?>
     </ul>
   </nav>
   <a href="https://www.univ-lyon1.fr/" target="_blank" style="position:absolute; top:0; right:0;"><img

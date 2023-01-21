@@ -19,7 +19,9 @@ function temps_de_connexion(){
   var hours = Math.floor(timeElapsed / 3600);
   var minutes = Math.floor((timeElapsed % 3600) / 60);
   var seconds = Math.floor(timeElapsed % 60);
-  document.getElementById("connex_ok").innerHTML = "Vous êtes connecté depuis : " + hours + "Heures:" + minutes + "Minutes:" + seconds + "secondes.";
+  document.getElementById("connex_ok").innerHTML = hours + "Heures:" + minutes + "Minutes:" + seconds + "secondes.";
   }, 1000);
 }
+
+
 
