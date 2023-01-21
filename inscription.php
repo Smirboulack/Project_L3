@@ -66,8 +66,6 @@ if (isset($_POST["submit"])) {
     $connexion = mysqli_connect(SERVEUR, UTILISATEUR, MOTDEPASSE, BDD);
     $errors = array();
 
-
-
     if (empty($username) || empty($password) || empty($passwordconfirm) || empty($email) || empty($date)) {
         $errors[] = 'Tous les champs doivent être remplis';
     }
@@ -84,31 +82,28 @@ if (isset($_POST["submit"])) {
         $errors[] = "L'email est déjà utilisee";
     }
 
+    if (!in_array($domain, $mail_autoriser)) {
+        $errors[] = 'L\'adresse email n\'est pas valide';
+    }
+
     if (strlen($password) < 10) {
         $errors[] = 'Le mot de passe doit contenir au moins 10 caractères';
     }
 
-    
     if (!preg_match('/[A-Z]/', $password)) {
-    $errors[] = 'Le mot de passe doit contenir au moins une majuscule';
+        $errors[] = 'Le mot de passe doit contenir au moins une majuscule';
     }
-    
 
     if (checkUpperCase($password) == 0) {
         $errors[] = 'Le mot de passe doit contenir au moins une majuscule';
     }
 
-
     if (!preg_match('/[0-9]/', $password)) {
         $errors[] = 'Le mot de passe doit contenir au moins un chiffre';
     }
-
+    
     if ($password !== $passwordconfirm) {
         $errors[] = 'Les mots de passe ne sont pas identiques';
-    }
-
-    if (!in_array($domain, $mail_autoriser)) {
-        $errors[] = 'L\'adresse email n\'est pas valide';
     }
 
     if (empty($date)) {
@@ -121,7 +116,7 @@ if (isset($_POST["submit"])) {
         $password = md5($password);
         $requete = "INSERT INTO utilisateurs (pseudo_u, mot_de_passe, email, date_naiss) VALUES ('$username', '$password', '$email', '$date')";
         executeQuery($connexion, $requete);
-
+        echo '<script type="text/javascript">etape_suivconnex();</script>';
     } else {
         echo '<ul>';
         foreach ($errors as $error) {

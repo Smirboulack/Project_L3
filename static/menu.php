@@ -17,8 +17,7 @@
       <li><a href="Connexion.php">Connexion</a></li>
       <li><a href="inscription.php">Inscription</a></li>
       <li><a href="http://cazabetremy.fr/wiki/doku.php?id=projet:presentation#enseignants" target="_blank">Page web de l'UE</a></li>
-      <li></li>
-        
+      <li><a href=""></li>
     </ul>
   </nav>
   <a href="https://www.univ-lyon1.fr/" target="_blank" style="position:absolute; top:0; right:0;"><img
