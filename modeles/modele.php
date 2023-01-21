@@ -6,8 +6,7 @@
 use LDAP\Result;
 
 /**
-* Initialise la connexion à la base de données courante (spécifiée selon constante 
-globale SERVEUR, UTILISATEUR, MOTDEPASSE, BDD)
+* Initialise la connexion à la base de données courante (spécifiée selon constante globale SERVEUR, UTILISATEUR, MOTDEPASSE, BDD)
 */
 function open_connection_DB()
 {

@@ -2,11 +2,11 @@
 function etape_suivconnex(){
   if (window.confirm("Inscription réussis ! Passer à la connexion ?")) {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'inscription.php?subscribe=oui', true);
+    xhr.open('GET', 'index.php?page=inscription?subscribe=oui', true);
     xhr.send();
     xhr.onreadystatechange = function () {
       if (xhr.readyState == XMLHttpRequest.DONE) {
-        window.location.href = 'connexion.php';
+        window.location.href = 'index.php?page=connexion';
       }
     }
   }
