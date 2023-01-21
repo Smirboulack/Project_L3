@@ -57,18 +57,16 @@ require_once 'includes/bdd.php';
 if (isset($_POST["submit"])) {
 
     $username = $_POST['username'];
-    $password = md5($_POST['password']);
-    $passwordconfirm = md5($_POST['passwordconfirm']);
+    $password = ($_POST['password']);
+    $passwordconfirm = ($_POST['passwordconfirm']);
     $email = $_POST['email'];
     $date = $_POST['date'];
-
     $mail_autoriser = array('outlook.com', 'gmail.com', 'hotmail.com', 'hotmail.fr', 'outlook.fr');
     $domain = strtolower(substr($email, strrpos($email, '@') + 1));
-
-
     $connexion = mysqli_connect(SERVEUR, UTILISATEUR, MOTDEPASSE, BDD);
-
     $errors = array();
+
+
 
     if (empty($username) || empty($password) || empty($passwordconfirm) || empty($email) || empty($date)) {
         $errors[] = 'Tous les champs doivent être remplis';
@@ -82,14 +80,24 @@ if (isset($_POST["submit"])) {
         $errors[] = 'Le pseudonyme est déjà utilisee';
     }
 
+    if (checkAvailability_email($email, $connexion) == 0) {
+        $errors[] = "L'email est déjà utilisee";
+    }
+
     if (strlen($password) < 10) {
         $errors[] = 'Le mot de passe doit contenir au moins 10 caractères';
     }
-    /*
+
+    
     if (!preg_match('/[A-Z]/', $password)) {
     $errors[] = 'Le mot de passe doit contenir au moins une majuscule';
     }
-    */
+    
+
+    if (checkUpperCase($password) == 0) {
+        $errors[] = 'Le mot de passe doit contenir au moins une majuscule';
+    }
+
 
     if (!preg_match('/[0-9]/', $password)) {
         $errors[] = 'Le mot de passe doit contenir au moins un chiffre';
@@ -110,8 +118,10 @@ if (isset($_POST["submit"])) {
     if (empty($errors)) {
         // Enregistrement de l'utilisateur
         // open_connection_DB();
+        $password = md5($password);
         $requete = "INSERT INTO utilisateurs (pseudo_u, mot_de_passe, email, date_naiss) VALUES ('$username', '$password', '$email', '$date')";
         executeQuery($connexion, $requete);
+
     } else {
         echo '<ul>';
         foreach ($errors as $error) {
