@@ -109,6 +109,6 @@ function update(){
     
 
      if(personnage.y>=454){action_en_lair=false;}
-     if(personnage.y>400)console.log(personnage.y);
+     
 }
 
