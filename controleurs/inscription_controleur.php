@@ -10,7 +10,7 @@ if (isset($_POST["submit"])) {
     $mail_autoriser = array('outlook.com', 'gmail.com', 'hotmail.com', 'hotmail.fr', 'outlook.fr');
     $domain = strtolower(substr($email, strrpos($email, '@') + 1));
     $connexion = mysqli_connect(SERVEUR, UTILISATEUR, MOTDEPASSE, BDD);
-    $errors = array();
+    
 
     if (empty($username) || empty($password) || empty($passwordconfirm) || empty($email) || empty($date)) {
         $errors[] = 'Tous les champs doivent être remplis';

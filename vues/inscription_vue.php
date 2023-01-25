@@ -22,6 +22,6 @@
     </div>
     <button type="submit" class="btn btn-primary" name="submit">Envoyer</button>
     <div>
-        <p>Déjà inscrit ? <button type="submit" class="btn btn" name="submit"><a href="index.php?page=connexion">Connexion</a></button></p>
+        <a href="index.php?page=connexion">Déjà inscrit ? Connexion</a>
     </div>
 </form>
