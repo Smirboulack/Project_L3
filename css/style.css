@@ -80,6 +80,15 @@ a{
 .main_div{
   padding-top: 70px;
   color: white;
+
+}
+
+.main_div .Interface_jeux{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
 #form_insc {
@@ -198,9 +207,6 @@ button:hover {
   form {
       width: 90%;
   }
-}
-.Interface_jeux{
-  
 }
 
 
