@@ -107,6 +107,4 @@ function checkUpperCase($str)
 
 
 
-
-
 ?>

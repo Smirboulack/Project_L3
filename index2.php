@@ -11,6 +11,8 @@
 <body>
 <div id="game">
 
+
+
 <script src="script/script_jeu.js"></script>
 </div>
 

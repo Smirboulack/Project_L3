@@ -80,33 +80,22 @@ a{
 .main_div{
   padding-top: 70px;
   color: white;
-
 }
 
-.main_div .Interface_jeux{
+.Interface_jeux{
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
+  left: 70%;
 }
 
-#form_insc {
-  position: absolute;
-  width: 50%;
-  margin: 0 auto;
-  padding: 30px;
-  border-radius: 10px;
-  background-color:transparent;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+#titre_jeu{
+  position:absolute;
+  left:60%
 }
-
 
 .form-group {
   margin-bottom: 20px;
 }
+
 
 @media all and (max-width: 991px) {
 
@@ -177,13 +166,47 @@ a{
     display: none;
   }
 
+  .open .Interface_jeux{
+    display: none;
+  }
+
+  .open #titre_jeu{
+    display: none;
+  }
+
+  #titre_jeu{
+    top: 0%;
+    left: 15%;
+  }
+
+  .Interface_jeux{
+    top:0%;
+    left: 50%;
+    }
+
+
 }
+
+#form_insc {
+  position: absolute;
+  width: 50%;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 10px;
+  background-color:transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 
 label {
   font-weight: bold;
 }
 
-input {
+
+
+#form_insc input{
   width: 100%;
   padding: 10px;
   border-radius: 5px;
@@ -221,6 +244,7 @@ footer {
   left: 0;
   background: #000;
   color: #fff;
+  /*padding: 0 2rem;*/
   padding: 0 2rem;
 }
 

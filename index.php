@@ -27,6 +27,7 @@ open_connection_DB();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.11.0/phaser.js" integrity="sha512-1zR767FhanvFF6k1xfgShu/iDacJuy4imuGSgBb6FUsKMWjAnJyxLAO0ixhCMWCDJKtHUqk/ggbJwpBKVwD7IA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script/scriptapp.js"></script>
   </head>
 <body>
 
@@ -45,10 +46,7 @@ open_connection_DB();
       $controleur = $nomPage . '_controleur.php';
       $vue = $nomPage . '_vue.php';
     }
-    if(isset($_SESSION["logged"])) { 
-      $username = $_SESSION["logged"];
-      echo 'Vous êtes maintenant connecté en tant que :'. $username . ' depuis : '.'<li id="connex_ok"> '.'<script type="text/javascript">temps_de_connexion();</script>' . '</li>';
-    }
+    
     if(isset($_POST["déconnexion"])){
       unset($_SESSION["logged"]);
       session_unset();
@@ -60,9 +58,12 @@ open_connection_DB();
     include('vues/' . $vue);
 
     ?>
+    
   </main>
 
   <?php include('static/footer.php'); ?>
-    <script src="script/scriptapp.js"></script>
+  <script src="script/scriptapp.js"></script>
+  <script src="script/responsiv_control.js"></script>
+    
 </body>
 </html>
