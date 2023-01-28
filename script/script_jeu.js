@@ -3,10 +3,11 @@
 function redirect(game) {
 
   if (game == "CHATGPT") {
-    const config = {
+
+    var config = {
+      type: Phaser.AUTO,
       width: 900,
       height: 600,
-      type: Phaser.AUTO,
       physics: {
         default: 'arcade',
         arcade: {
@@ -17,42 +18,51 @@ function redirect(game) {
       scene: {
         preload: preload,
         create: create,
-        update: update
+        update: update,
+        keyJustDown: keyJustDown
+
       }
     }
 
-    var game = new Phaser.Game(config)
-    let personnage
-    let personnage2
-    let cursors
-    let platforms
+    var game = new Phaser.Game(config);
+
+    let personnage;
+    let personnage2;
+    let cursors;
+    let platforms;
     var score = 0;
     var scoreText;
-    let action_en_lair = false;
-    let derniere_pos
-    let moveRightTimer;
+    var keysDown = {};
+
+    var fleches;
     var spacebar;
+
 
 
     function preload() {
       this.load.image('skin', 'images/skin.png');
       this.load.image('ciel', 'images/sky.png');
       this.load.image('sol', 'images/platform.png');
+      this.load.image('fleche', 'images/fleche.png');
+      //  this.load.image('crounch','images/crounch_left.png');
       this.load.spritesheet('sprite_sheet',
-        'images/spritesheet.png',
-        { frameWidth: 169.2, frameHeight: 238 }
+        'images/spritesheet2.png',
+        { frameWidth: 165, frameHeight: 231 }
       );
+
+
+
     }
 
 
     function create() {
 
+
+
       cursors = this.input.keyboard.createCursorKeys();
       ciel = this.add.image(0, 0, 'ciel');
       ciel.setScale(5)
-      // personnage = this.physics.add.image(0, 0, 'skin');
       personnage = this.physics.add.sprite(0, 0, 'sprite_sheet');
-      // personnage2 = this.physics.add.image(1800, 0, 'skin');
       personnage2 = this.physics.add.sprite(900, 0, 'sprite_sheet');
       platforms = this.physics.add.staticGroup();
       platforms.create(400, 568, 'sol').setScale(2).refreshBody();
@@ -61,6 +71,7 @@ function redirect(game) {
       platforms.create(500, 320, 'sol');
       platforms.create(1000, 320, 'sol');
       platforms.create(1600, 450, 'sol');
+
       this.physics.add.collider(personnage, platforms);
       this.physics.add.collider(personnage2, platforms);
       this.physics.add.collider(personnage2, personnage);
@@ -70,8 +81,10 @@ function redirect(game) {
       personnage2.setScale(0.4)
       personnage.body.setBounce(0.2)
       personnage2.body.setBounce(0.2)
-      scoreText1 = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-      scoreText2 = this.add.text(730, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
+      //   scoreText1 = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+      //  scoreText2 = this.add.text(730, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
       spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
       touche_z = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
       touche_q = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
@@ -93,21 +106,6 @@ function redirect(game) {
       });
 
       this.anims.create({
-        key: 'right',
-        frames: this.anims.generateFrameNumbers('sprite_sheet', { start: 5, end: 8 }),
-        frameRate: 10,
-        repeat: -1
-      });
-
-
-      this.anims.create({
-        key: 'left',
-        frames: this.anims.generateFrameNumbers('sprite_sheet', { start: 1, end: 3 }),
-        frameRate: 10,
-        repeat: -1
-      });
-
-      this.anims.create({
         key: 'turn_perso2',
         frames: [{ key: 'sprite_sheet', frame: 4 }],
         frameRate: 20
@@ -122,63 +120,175 @@ function redirect(game) {
 
 
 
+
+      this.physics.world.setBounds(0, 0, 2000, 600);
+      this.cameras.main.setBounds(0, 0, 2000, 600);
+      this.cameras.main.startFollow(personnage, false, 0.2, 0.2);
+
+      this.data.set('lives', 3);
+      this.data.set('level', 5);
+      this.data.set('score', 2000);
+
+      var text = this.add.text(16, 16, '', { font: '32px Courier', fill: '#00ff00' });
+
+      text.setText([
+        'Level: ' + this.data.get('level'),
+        'Lives: ' + this.data.get('lives'),
+        'Score: ' + this.data.get('score')
+      ]);
+
+      /*
+      var Fleche = new Phaser.Class({
+
+        Extends: Phaser.GameObjects.Image,
+
+        initialize:
+
+          function fleche(scene) {
+            Phaser.GameObjects.Image.call(this, scene, 0, 0, 'fleche');
+            this.speed = Phaser.Math.GetSpeed(600, 1);
+            this.angle = Phaser.Math.Angle.Between(0, 0, scene.input.activePointer.x, scene.input.activePointer.y);
+          },
+
+        fire: function (x, y, angle) {
+          this.setPosition(x, y);
+
+          this.setActive(true);
+          this.setVisible(true);
+        },
+
+        update: function (time, delta) {
+          this.x += this.speed * delta;
+
+          if (this.x > 2000) {
+            this.setActive(false);
+            this.setVisible(false);
+          }
+          if (this.x <= 0) {
+            this.setActive(false);
+            this.setVisible(false);
+          }
+
+        }
+
+      });
+
+      fleches = this.add.group({
+        classType: Fleche,
+        maxSize: 100,
+        runChildUpdate: true
+      });
+
+
+
+      var gfx = this.add.graphics().setDefaultStyles({ lineStyle: { width: 10, color: 0xffdd00, alpha: 0.5 } });
+      var line = new Phaser.Geom.Line();
+      var angle = 0;
+
+      this.input.on('pointermove', function (pointer) {
+        angle = Phaser.Math.Angle.BetweenPoints(personnage, pointer);
+        Phaser.Geom.Line.SetToAngle(line, personnage.x, personnage.y, angle, 128);
+        gfx.clear().strokeLineShape(line);
+      }, this);
+
+      this.input.on('pointerup', function () {
+        var fleche = fleches.get();
+        if (fleche) {
+          fleche.fire(personnage.x, personnage.y);
+        }
+      }, this);
+
+      */
+
+      var Fleche = new Phaser.Class({
+        Extends: Phaser.GameObjects.Image,
+
+        initialize:
+    
+          function fleche(scene) {
+            Phaser.GameObjects.Image.call(this, scene, 0, 0, 'fleche');
+            this.speed = Phaser.Math.GetSpeed(600, 1);
+            this.angle = Phaser.Math.Angle.Between(0, 0, scene.input.activePointer.x, scene.input.activePointer.y);
+          },
+    
+        fire: function (x, y, angle) {
+          this.setPosition(x, y);
+          this.angle = angle;  // set the angle of the fleche to the angle of the mouse pointer
+          this.setActive(true);
+          this.setVisible(true);
+        },
+    
+        update: function (time, delta) {
+          this.x += this.speed * delta * Math.cos(this.angle); // update x position based on angle
+          this.y += this.speed * delta * Math.sin(this.angle); // update y position based on angle
+    
+          if (this.x > 2000) {
+            this.setActive(false);
+            this.setVisible(false);
+          }
+          if (this.x <= 0) {
+            this.setActive(false);
+            this.setVisible(false);
+          }
+    
+        }
+    
+      });
+    
+      fleches = this.add.group({
+        classType: Fleche,
+        maxSize: 100,
+        runChildUpdate: true
+
+        
+      });
+
+      fleches.children.iterate(function (fleche) {
+        this.physics.add.existing(fleche);
+    });
+    
+    
+    
+      var gfx = this.add.graphics().setDefaultStyles({ lineStyle: { width: 10, color: 0xffdd00, alpha: 0.5 } });
+      var line = new Phaser.Geom.Line();
+      var angle = 0;
+    
+      this.input.on('pointermove', function (pointer) {
+        angle = Phaser.Math.Angle.BetweenPoints(personnage, pointer);
+        Phaser.Geom.Line.SetToAngle(line, personnage.x, personnage.y, angle, 128);
+        gfx.clear().strokeLineShape(line);
+      }, this);
+    
+      this.input.on('pointerup', function () {
+        var fleche = fleches.get();
+        this.physics.add.existing(fleche);
+        this.physics.add.collider(fleches, platforms);
+        this.physics.add.collider(fleches, personnage2);
+        if (fleche) {
+          fleche.fire(personnage.x, personnage.y, angle);  // pass the current angle to the fire method
+
+        }
+      }, this);
+    
+
+
     }
 
 
-    /*
-    function update() {
-    
-      if (!cursors.up.isDown && personnage.body.blocked.down) {
-        personnage.setVelocityX(0)
+    function keyJustDown(key) {
+      if (keysDown[key] === undefined) {
+        keysDown[key] = true;
+        return true;
+      } else {
+        return false;
       }
-    
-      if (cursors.up.isDown && personnage.body.blocked.down) {
-        personnage.setVelocity(0, -300)
-      }
-    
-      if (cursors.right.isDown && personnage.body.blocked.down) {
-        personnage.setVelocity(200, 0)
-      }
-      if (cursors.left.isDown && personnage.body.blocked.down) {
-        personnage.setVelocity(-200, 0)
-      }
-      if (cursors.down.isDown && personnage.body.blocked.down) {
-        personnage.setVelocity(0, 200)
-      }
-      if (cursors.right.isDown && cursors.up.isDown && personnage.body.blocked.down) {
-        personnage.setVelocity(200, -300)
-    
-      }
-      if (cursors.left.isDown && cursors.up.isDown && personnage.body.blocked.down) {
-        personnage.setVelocity(-200, -300)
-      }
-    
-    
-      if (personnage.y < derniere_pos-20) {
-        if (!personnage.body.blocked.down ) {
-          if(cursors.right.isDown && action_en_lair==false ){
-            personnage.setVelocity(200,0)
-            action_en_lair=true;
-        }
-        if(cursors.left.isDown  && action_en_lair==false){
-          personnage.setVelocity(-200,0)
-          action_en_lair=true;
-        }
-        }
-      }
-    
-    
-      if (personnage.body.blocked.down) {
-        action_en_lair = false;
-        derniere_pos = personnage.y
-      }
-      console.log(cursors.right.justDown)
-    
     }
-    */
+
 
 
     function update() {
+
+
 
       if (cursors.left.isDown) {
         personnage.setVelocityX(-200);
@@ -187,6 +297,10 @@ function redirect(game) {
       else if (cursors.right.isDown) {
         personnage.setVelocityX(200);
         personnage.anims.play('right', true);
+      }
+      else if (cursors.down.isDown) {
+        personnage.setVelocityX(0);
+        personnage.anims.play('down_left', true);
       }
       else {
         personnage.setVelocityX(0);
@@ -220,22 +334,57 @@ function redirect(game) {
       if (touche_z.isDown && personnage2.body.touching.down) {
         personnage2.setVelocityY(-350)
       }
-    //  console.log(personnage.y);
-    if(personnage.y >552 && cursors.up.isDown){
-      personnage.setVelocityY(-350)
-    }
-    if(personnage2.y >552 && touche_z.isDown){
-      personnage2.setVelocityY(-350)
-    }
-    }
+      //  console.log(personnage.y);
+      if (personnage.y > 552 && cursors.up.isDown) {
+        personnage.setVelocityY(-350)
+      }
+      if (personnage2.y > 552 && touche_z.isDown) {
+        personnage2.setVelocityY(-350)
+      }
 
-    
+
+      if (spacebar.justDown)
+      // if(Phaser.Input.Keyboard.justDown(spacebar))
+      {
+        console.log("pressed");
+        var fleche = fleches.get();
+
+        if (fleche) {
+          fleche.fire(personnage.x, personnage.y);
+        }
+
+      }
+
+
+      this.input.keyboard.on('keydown', function (event) {
+        if (event.code === 'Space' && keyJustDown(event.code)) {
+          console.log("pressed");
+          var fleche = fleches.get();
+          var fleche2 = fleches.get();
+
+          if (fleche) {
+            fleche.fire(personnage.x, personnage.y);
+          }
+
+
+        }
+
+      });
+
+      this.input.keyboard.on('keyup', function (event) {
+        keysDown[event.code] = undefined;
+      });
+
+      this.input.keyboard.on('keyup', function (event) {
+        keysDown[event.code] = undefined;
+      });
+
+    }
 
   }
-
-
-
 }
+
+
 
 
 
