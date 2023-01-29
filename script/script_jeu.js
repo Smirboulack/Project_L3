@@ -57,10 +57,8 @@ function redirect(game) {
       var tabfleches=[]
       for(let i=0;i<10;i++){
         tabfleches[i]=this.physics.add.sprite(personnage.x, personnage2.y, 'fleche').setScale(1);
-        tabfleches[i].disableBody(true, true);
-       
-      }
-      
+        tabfleches[i].disableBody(true, true); 
+      }   
       platforms = this.physics.add.staticGroup();
       platforms.create(400, 568, 'sol').setScale(2).refreshBody();
       platforms.create(1400, 568, 'sol').setScale(2).refreshBody();
@@ -83,10 +81,8 @@ function redirect(game) {
       this.anims.create({key:'frape',frames: this.anims.generateFrameNames('steve',{prefix:'frape',end:3,zeroPad:4}),repeat:0});
       this.anims.create({key:'saut',frames: this.anims.generateFrameNames('steve',{prefix:'saut',end:4,zeroPad:4}),repeat:-1});
       this.anims.create({key:'tir',frames: this.anims.generateFrameNames('steve',{prefix:'tir',end:20,zeroPad:4}),repeat:-1});
-
       // scoreText1 = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
       // scoreText2 = this.add.text(730, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-
       spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
       touche_z = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
       touche_q = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
@@ -96,16 +92,13 @@ function redirect(game) {
       var gfx = this.add.graphics().setDefaultStyles({ lineStyle: { width: 10, color: 0xffdd00, alpha: 0.5 } });
       var line = new Phaser.Geom.Line();
       var angle = 0;
-
       this.input.on('pointermove', function (pointer) {
         angle = Phaser.Math.Angle.BetweenPoints(personnage, pointer);
         Phaser.Geom.Line.SetToAngle(line, personnage.x, personnage.y, angle, 500);
         gfx.clear().strokeLineShape(line);
       }, this);
 
-      
       var nbfleches=tabfleches.length;
-     
       this.input.on('pointerup', function () {
         nbfleches--; let i=nbfleches;
         console.log(nbfleches);
@@ -116,13 +109,10 @@ function redirect(game) {
         this.physics.add.collider(tabfleches[i], platforms);
         this.physics.add.collider(tabfleches[i], personnage2);
         this.physics.add.collider(tabfleches[i], personnage);
-      //  tabfleches[i].body.collideWorldBounds = true;
+      //tabfleches[i].body.collideWorldBounds = true;
         tabfleches[i].body.setBounce(0.5);
       } 
     }, this);
-
-
-
       this.physics.world.setBounds(0, 0, 2000, 600);
       this.cameras.main.setBounds(0, 0, 2000, 600);
       this.cameras.main.startFollow(personnage, false, 0.2, 0.2);
@@ -143,8 +133,6 @@ function redirect(game) {
         'Touches 2: ' + this.data.get('touches 2'),
         'Score 2: ' + this.data.get('score2'),
       ]);
-      
-
     }
 
 
@@ -160,61 +148,7 @@ function redirect(game) {
 
 
     function update() {
-
 /*
-
-      if (cursors.left.isDown) {
-        personnage.setVelocityX(-200);
-        personnage.anims.play('left', true);
-      }
-      else if (cursors.right.isDown) {
-        personnage.setVelocityX(200);
-        personnage.anims.play('right', true);
-      }
-      else if (cursors.down.isDown) {
-        personnage.setVelocityX(0);
-        personnage.anims.play('down_left', true);
-      }
-      else {
-        personnage.setVelocityX(0);
-        if (personnage2.x > personnage.x) {
-          personnage.anims.play('turn_perso1');
-        } else {
-          personnage.anims.play('turn_perso2');
-        }
-
-      }
-      if (cursors.up.isDown && personnage.body.touching.down) {
-        personnage.setVelocityY(-350)
-      }
-
-      if (touche_q.isDown) {
-        personnage2.setVelocityX(-200);
-        personnage2.anims.play('left', true);
-      }
-      else if (touche_d.isDown) {
-        personnage2.setVelocityX(200);
-        personnage2.anims.play('right', true);
-      }
-      else {
-        personnage2.setVelocityX(0);
-        if (personnage2.x > personnage.x) {
-          personnage2.anims.play('turn_perso2');
-        } else {
-          personnage2.anims.play('turn_perso1');
-        }
-      }
-      if (touche_z.isDown && personnage2.body.touching.down) {
-        personnage2.setVelocityY(-350)
-      }
-      //  console.log(personnage.y);
-      if (personnage.y > 552 && cursors.up.isDown) {
-        personnage.setVelocityY(-350)
-      }
-      if (personnage2.y > 552 && touche_z.isDown) {
-        personnage2.setVelocityY(-350)
-      }
-
 
       if (spacebar.justDown)
       // if(Phaser.Input.Keyboard.justDown(spacebar))
@@ -252,10 +186,6 @@ function redirect(game) {
         keysDown[event.code] = undefined;
       });
       */
-
-
-
-      
 
 
         //BLOC PERSO 1
@@ -315,6 +245,14 @@ function redirect(game) {
       
       if(!personnage2.body.touching.down && !touche_s.isDown && !spacebar.isDown && personnage2.body.velocity.y>=100 || personnage2.body.velocity.y<=-50  )personnage2.anims.play('saut',true);
       
+      
+      if (personnage.body.y > 504 && cursors.up.isDown) {
+        personnage.setVelocityY(-350)
+      }
+      if (personnage2.body.y > 504 && touche_z.isDown) {
+        personnage2.setVelocityY(-350)
+      }
+
       
     }
 
