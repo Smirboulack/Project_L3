@@ -8,3 +8,4 @@ primary key (id_u,pseudo_u,email)
 );
 
 alter table utilisateurs add unique (email);
+ALTER table utilisateurs modify id_u INT NOT NULL AUTO_INCREMENT;
