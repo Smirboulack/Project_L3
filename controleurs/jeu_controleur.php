@@ -10,6 +10,7 @@ if (isset($_POST["links"])){
     echo "<script>";
   echo "redirect('$valeur_jeu');";
   echo "</script>"; */
+
 }
 
 ?>

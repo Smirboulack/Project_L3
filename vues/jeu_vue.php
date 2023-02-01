@@ -28,15 +28,18 @@
 
 
 <div class="chat-global">
-
-    <div class="nav-top">
+<div class="nav-top">
         <div class="location">
             <img src="images/left-chevron.svg">
             <p>Back</p>
         </div>
 
         <div class="utilisateur">
-            <p>John Doe</p>
+            
+            <?php 
+            if(isset($_SESSION['logged'])){echo'<p>'.$_COOKIE['pseudo'].'</p>';} else {
+              echo '<p></p>';}
+            ?>
             <p>Active Now</p>
         </div>
 
