@@ -94,6 +94,13 @@ function checkAvailability_email($email, $link)
 	return mysqli_num_rows($result) == 0;
 }
 
+function getUser_ID($pseudo, $link)
+{
+	$query = "SELECT id_u FROM utilisateurs WHERE pseudo_u = '" . $pseudo . "';";
+	$result = executeQuery($link, $query);
+	return mysqli_num_rows($result) == 0;
+}
+
 
 function checkUpperCase($str)
 {

@@ -1,4 +1,4 @@
-<form id="form_insc" action="index.php?page=inscription" method="POST">
+<form id="form_insc" action="index.php?page=inscription" method="POST" enctype="multipart/form-data" autocomplete="off">
     <div class="form-group">
         <label for="username">Pseudonyme </label>
         <input type="text" class="form-control" id="username" name="username" placeholder="(entre 5 et 15 caractères)">
@@ -20,6 +20,10 @@
         <label for="date_naiss">Votre date de naissance</label>
         <input type="date" class="form-control" id="date" name="date">
     </div>
+    <div class="form-group">
+          <label>Selection image d'Avatar</label>
+          <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg,image/jpg" required>
+        </div>
     <button type="submit" class="btn btn-primary" name="submit">Envoyer</button>
     <div>
         <a href="index.php?page=connexion">Déjà inscrit ? Connexion</a>

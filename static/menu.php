@@ -13,6 +13,7 @@
         </div>
         <ul class="menu">
             <li><a href="index.php?page=accueil">Accueil</a></li>
+            <li><a href="index.php?page=chat">Chat</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="index.php?page=jeu">Jouer</a></li>
             <?php if (!isset($_SESSION["logged"])) {

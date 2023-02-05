@@ -7,6 +7,8 @@ if (isset($_POST["submit"])) {
     $passwordconfirm = ($_POST['passwordconfirm']);
     $email = $_POST['email'];
     $date = $_POST['date'];
+//s    $image = $_FILES['image'];
+ //   $image = $_POST['image'];
     $mail_autoriser = array('outlook.com', 'gmail.com', 'hotmail.com', 'hotmail.fr', 'outlook.fr');
     $domain = strtolower(substr($email, strrpos($email, '@') + 1));
     $connexion = mysqli_connect(SERVEUR, UTILISATEUR, MOTDEPASSE, BDD);
@@ -56,11 +58,32 @@ if (isset($_POST["submit"])) {
         $errors[] = "La date de naissance n'est pas correcte.";
     }
 
+    if(isset($_FILES['image'])){
+        $img_name = $_FILES['image']['name'];
+        $img_type = $_FILES['image']['type'];
+        $tmp_name = $_FILES['image']['tmp_name'];
+        $img_explode = explode('.',$img_name);
+        $img_ext = end($img_explode);
+
+        $extensions = ["jpeg", "png", "jpg"];
+        if(in_array($img_ext, $extensions) === true){
+            $types = ["image/jpeg", "image/jpg", "image/png"];
+            if(in_array($img_type, $types) === true){
+                $time = time();
+                $new_img_name = $time.$img_name;
+                if(!move_uploaded_file($tmp_name,"images/".$new_img_name)){$errors[] = "Veuillez charger une image de type - jpeg, png, jpg";}
+            }
+        }else{
+            $errors[] = "Veuillez charger une image de type - jpeg, png, jpg";
+        }
+    }
+
     if (empty($errors)) {
         // Enregistrement de l'utilisateur
         // open_connection_DB();
         $password = md5($password);
-        $requete = "INSERT INTO utilisateurs (pseudo_u, mot_de_passe, email, date_naiss) VALUES ('$username', '$password', '$email', '$date')";
+        $status = "Active now";
+        $requete = "INSERT INTO utilisateurs3 (pseudo_u, mot_de_passe, email, date_naiss,img,status,score) VALUES ('$username', '$password', '$email', '$date','$new_img_name','$status',0)";
         executeQuery($connexion, $requete);
         echo '<script type="text/javascript">etape_suivconnex();</script>';
     } else {
