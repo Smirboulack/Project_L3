@@ -69,7 +69,6 @@ if (isset($_POST["submit"])) {
         if(in_array($img_ext, $extensions) === true){
             $types = ["image/jpeg", "image/jpg", "image/png"];
             if(in_array($img_type, $types) === true){
-                $time = time();
                 $new_img_name = $time.$img_name;
                 if(!move_uploaded_file($tmp_name,"images/".$new_img_name)){$errors[] = "Veuillez charger une image de type - jpeg, png, jpg";}
             }
@@ -82,8 +81,10 @@ if (isset($_POST["submit"])) {
         // Enregistrement de l'utilisateur
         // open_connection_DB();
         $password = md5($password);
+        $time = time();
+        $id_u = rand(time(), 100000000);
         $status = "Active now";
-        $requete = "INSERT INTO utilisateurs3 (pseudo_u, mot_de_passe, email, date_naiss,img,status,score) VALUES ('$username', '$password', '$email', '$date','$new_img_name','$status',0)";
+        $requete = "INSERT INTO utilisateurs3 (id_u,pseudo_u, mot_de_passe, email, date_naiss,img,status,score) VALUES ('$id_u','$username', '$password', '$email', '$date','$new_img_name','$status',0)";
         executeQuery($connexion, $requete);
         echo '<script type="text/javascript">etape_suivconnex();</script>';
     } else {

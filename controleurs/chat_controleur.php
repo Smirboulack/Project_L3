@@ -6,9 +6,8 @@ if (!isset($_SESSION['logged'])) {
     
 echo '<script src="script/users.js"></script>';
 echo '<link rel="stylesheet" href="css/chat.css">';
-
     $_SESSION["acces_chat"] = "ok";
-    $_SESSION["userid"] = getUser_ID($_COOKIE['pseudo'], $connexion);
+    $_SESSION["userid"] = getUser_ID($_SESSION['logged'], $connexion);
 }
 
 

@@ -8,6 +8,7 @@
                     $row = mysqli_fetch_assoc($sql);
                 }
                 ?>
+                
                 <img src="images/<?php echo $row['img']; ?>" alt="">
                 <div class="details">
                     <span>
@@ -25,7 +26,7 @@
             <input type="text" placeholder="Enter name to search...">
             <button><i class="fas fa-search"></i></button>
         </div>
-        <div class="users-list">
+        <div class="users-list"> 
 
         </div>
     </section>

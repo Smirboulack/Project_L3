@@ -96,9 +96,13 @@ function checkAvailability_email($email, $link)
 
 function getUser_ID($pseudo, $link)
 {
-	$query = "SELECT id_u FROM utilisateurs WHERE pseudo_u = '" . $pseudo . "';";
+	$user_id = null;
+	$query = "SELECT id_u FROM utilisateurs3 WHERE pseudo_u = '" . $pseudo . "';";
 	$result = executeQuery($link, $query);
-	return mysqli_num_rows($result) == 0;
+	while ($row = mysqli_fetch_assoc($result)) {
+		$user_id = $row["id_u"];
+	}
+	return $user_id;
 }
 
 

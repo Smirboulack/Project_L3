@@ -31,7 +31,7 @@ alter table utilisateurs2 add unique (email);
 ALTER table utilisateurs2 modify id_u INT NOT NULL AUTO_INCREMENT;
 
 CREATE TABLE `utilisateurs3` (
-id_u INTEGER(5) NOT NULL AUTO_INCREMENT,
+id_u INTEGER(5) NOT NULL,
 pseudo_u VARCHAR(30),
 mot_de_passe VARCHAR(50),
 email VARCHAR(50),
@@ -62,3 +62,4 @@ ALTER TABLE `messages`
 
 SELECT * from users u ;
 SELECT * from messages m ;
+
