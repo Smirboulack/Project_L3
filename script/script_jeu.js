@@ -2,7 +2,7 @@
 
 function redirect(game) {
 
-  if (game == "CHATGPT") {
+  if (game == "Sword Battle") {
 
     var config = {
       type: Phaser.AUTO,
@@ -259,6 +259,9 @@ function redirect(game) {
     
 
   }
+  
+
+
 }
 
 

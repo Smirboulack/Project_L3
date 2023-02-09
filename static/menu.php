@@ -22,6 +22,7 @@
                     
             } else {
                 //    echo '<li><form method="POST"><input style="background-color:red;" type="submit" value="Se déconnecter" name="déconnexion""/></form></li>';
+                echo '<li><button class="btn btn-secondary"><a href="index.php?page=profil">Profil</a></button></li>';
                 echo '<li><form method="POST"><button class="btn" style="background-color:red;" type="submit" value="Se déconnecter" name="déconnexion">Deconnexion</button></form></li>';
             }
             ?>

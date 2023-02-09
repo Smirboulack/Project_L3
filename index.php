@@ -25,14 +25,23 @@ open_connection_DB();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+ <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="css/style.css" />
+    crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.11.0/phaser.js"
     integrity="sha512-1zR767FhanvFF6k1xfgShu/iDacJuy4imuGSgBb6FUsKMWjAnJyxLAO0ixhCMWCDJKtHUqk/ggbJwpBKVwD7IA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="script/scriptapp.js"></script>
+    <script src="script/scriptapp.js"></script>
+  <?php 
+$current_page = basename($_SERVER['PHP_SELF']);
+if ($current_page === 'index.php?page=discussion') {
+  echo '<link rel="stylesheet" href="css/chat.css">';
+} else {
+    echo '<link rel="stylesheet" href="css/style.css" />';
+}
+  ?>
 </head>
 
 <body>
@@ -52,20 +61,22 @@ open_connection_DB();
       $controleur = $nomPage . '_controleur.php';
       $vue = $nomPage . '_vue.php';
     }
-
-    if (isset($_POST["déconnexion"])) {
+    if (isset($_POST["déconnexion"]) || isset($_GET['logout'])) {
+      header('Location: index.php');
+      Update_user_status_disconnect($_SESSION["logged"], $connexion);
       unset($_COOKIE['pseudo']);
       setcookie('pseudo', '', time() - 10);
       unset($_SESSION["logged"]);
       session_unset();
       session_destroy();
-
-      header('Location: index.php');
     }
+    if(isset($_GET['user_id'])){
+      $vue = "discussion_vue.php";
+      $controleur = "discussion_controleur.php";
+  }
     /* Inclusion du contrôleur et de la vue courante */
     include('controleurs/' . $controleur);
     include('vues/' . $vue);
-
     ?>
 
   </main>

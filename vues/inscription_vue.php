@@ -22,7 +22,7 @@
     </div>
     <div class="form-group">
           <label>Selection image d'Avatar</label>
-          <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg,image/jpg" required>
+          <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg,image/jpg">
         </div>
     <button type="submit" class="btn btn-primary" name="submit">Envoyer</button>
     <div>

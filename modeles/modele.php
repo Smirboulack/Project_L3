@@ -116,6 +116,19 @@ function checkUpperCase($str)
 	return false;
 }
 
+function Update_user_status_disconnect($pseudo,$link){
+	$status = "Deconnecté";
+	$req = "UPDATE utilisateurs3 SET status = '{$status}' WHERE pseudo_u='{$pseudo}'";
+	executeQuery($link, $req);
+}
+
+function Update_user_status_connect($pseudo,$link){
+	$status = "En ligne";
+	$req = "UPDATE utilisateurs3 SET status = '{$status}' WHERE pseudo_u='{$pseudo}'";
+	executeQuery($link, $req);
+}
+
+
 
 
 ?>

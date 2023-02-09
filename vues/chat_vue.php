@@ -8,7 +8,6 @@
                     $row = mysqli_fetch_assoc($sql);
                 }
                 ?>
-                
                 <img src="images/<?php echo $row['img']; ?>" alt="">
                 <div class="details">
                     <span>
@@ -19,16 +18,15 @@
                     </p>
                 </div>
             </div>
-            <a href="php/logout.php?logout_id=<?php echo $row['id_u']; ?>" class="logout">Logout</a>
+            <a href="index.php?logout=ok" class="logout">Logout</a>
         </header>
         <div class="search">
-            <span class="text">Select an user to start chat</span>
+            <span class="text" style="color:black;">Select an user to start chat</span>
             <input type="text" placeholder="Enter name to search...">
             <button><i class="fas fa-search"></i></button>
         </div>
-        <div class="users-list"> 
-
+        <div class="users-list">
+            <?php echo $output; ?>
         </div>
     </section>
 </div>
-

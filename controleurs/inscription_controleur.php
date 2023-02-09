@@ -7,12 +7,9 @@ if (isset($_POST["submit"])) {
     $passwordconfirm = ($_POST['passwordconfirm']);
     $email = $_POST['email'];
     $date = $_POST['date'];
-//s    $image = $_FILES['image'];
- //   $image = $_POST['image'];
     $mail_autoriser = array('outlook.com', 'gmail.com', 'hotmail.com', 'hotmail.fr', 'outlook.fr');
     $domain = strtolower(substr($email, strrpos($email, '@') + 1));
     $connexion = mysqli_connect(SERVEUR, UTILISATEUR, MOTDEPASSE, BDD);
-    
 
     if (empty($username) || empty($password) || empty($passwordconfirm) || empty($email) || empty($date)) {
         $errors[] = 'Tous les champs doivent être remplis';
@@ -49,7 +46,7 @@ if (isset($_POST["submit"])) {
     if (!preg_match('/[0-9]/', $password)) {
         $errors[] = 'Le mot de passe doit contenir au moins un chiffre';
     }
-    
+
     if ($password !== $passwordconfirm) {
         $errors[] = 'Les mots de passe ne sont pas identiques';
     }
@@ -58,22 +55,25 @@ if (isset($_POST["submit"])) {
         $errors[] = "La date de naissance n'est pas correcte.";
     }
 
-    if(isset($_FILES['image'])){
+    if (isset($_FILES['image'])) {
         $img_name = $_FILES['image']['name'];
         $img_type = $_FILES['image']['type'];
         $tmp_name = $_FILES['image']['tmp_name'];
-        $img_explode = explode('.',$img_name);
+        $img_explode = explode('.', $img_name);
         $img_ext = end($img_explode);
 
         $extensions = ["jpeg", "png", "jpg"];
-        if(in_array($img_ext, $extensions) === true){
+        if (in_array($img_ext, $extensions) === true) {
             $types = ["image/jpeg", "image/jpg", "image/png"];
-            if(in_array($img_type, $types) === true){
-                $new_img_name = $time.$img_name;
-                if(!move_uploaded_file($tmp_name,"images/".$new_img_name)){$errors[] = "Veuillez charger une image de type - jpeg, png, jpg";}
+            if (in_array($img_type, $types) === true) {
+                $new_img_name = $time . $img_name;
+                if (!move_uploaded_file($tmp_name, "images/" . $new_img_name)) {
+                    $errors[] = "Veuillez charger une image de type - jpeg, png, jpg 1";
+                }
             }
-        }else{
-            $errors[] = "Veuillez charger une image de type - jpeg, png, jpg";
+        } else {
+          //  $errors[] = "Veuillez charger une image de type - jpeg, png, jpg 2";
+          $new_img_name = "Default_user.png";
         }
     }
 
@@ -84,7 +84,8 @@ if (isset($_POST["submit"])) {
         $time = time();
         $id_u = rand(time(), 100000000);
         $status = "Active now";
-        $requete = "INSERT INTO utilisateurs3 (id_u,pseudo_u, mot_de_passe, email, date_naiss,img,status,score) VALUES ('$id_u','$username', '$password', '$email', '$date','$new_img_name','$status',0)";
+        $requete = "INSERT INTO utilisateurs3 (id_u,pseudo_u, mot_de_passe, email, date_naiss,img,status,score) 
+        VALUES ('$id_u','$username', '$password', '$email', '$date','$new_img_name','$status',0)";
         executeQuery($connexion, $requete);
         echo '<script type="text/javascript">etape_suivconnex();</script>';
     } else {
@@ -94,6 +95,5 @@ if (isset($_POST["submit"])) {
         }
         echo '</ul>';
     }
-
 }
 ?>
