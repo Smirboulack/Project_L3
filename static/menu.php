@@ -16,12 +16,12 @@
             <li><a href="index.php?page=chat">Chat</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="index.php?page=jeu">Jouer</a></li>
+
             <?php if (!isset($_SESSION["logged"])) {
                 echo '<li><button class="btn" style="color: black;"><a href="index.php?page=inscription">Inscription</a></button></li>' .
                     '<li><button class="btn btn-secondary"><a href="index.php?page=connexion">Connexion</a></button></li>';
                     
             } else {
-                //    echo '<li><form method="POST"><input style="background-color:red;" type="submit" value="Se déconnecter" name="déconnexion""/></form></li>';
                 echo '<li><button class="btn btn-secondary"><a href="index.php?page=profil">Profil</a></button></li>';
                 echo '<li><form method="POST"><button class="btn" style="background-color:red;" type="submit" value="Se déconnecter" name="déconnexion">Deconnexion</button></form></li>';
             }

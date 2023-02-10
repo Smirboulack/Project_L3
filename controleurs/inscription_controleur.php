@@ -64,16 +64,16 @@ if (isset($_POST["submit"])) {
 
         $extensions = ["jpeg", "png", "jpg"];
         if (in_array($img_ext, $extensions) === true) {
-            $types = ["image/jpeg", "image/jpg", "image/png"];
+            $types = ["image/jpeg", "image/jpg", "image/png, image/jfif"];
             if (in_array($img_type, $types) === true) {
                 $new_img_name = $time . $img_name;
-                if (!move_uploaded_file($tmp_name, "images/" . $new_img_name)) {
+                if (!move_uploaded_file($tmp_name, "images/" . $username)) {
                     $errors[] = "Veuillez charger une image de type - jpeg, png, jpg 1";
                 }
             }
         } else {
           //  $errors[] = "Veuillez charger une image de type - jpeg, png, jpg 2";
-          $new_img_name = "Default_user.png";
+          //$new_img_name = "Default_user.png";
         }
     }
 

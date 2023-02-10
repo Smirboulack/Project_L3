@@ -18,7 +18,7 @@
     </style>
     <tr>
         <td><?php if (isset($pseudo)) echo $pseudo; ?></td>
-        <td><?php if (isset($pseudo)) echo '<img src="' . $lien['img'] . '"style="width:90px;height: 90px;" >' ?></td>
+        <td><?php if (isset($pseudo)) echo '<img src="images/' . $lien['img'] . '"style="width:90px;height: 90px;" >' ?></td>
     </tr>
     <tr>
         <td colspan="2"><?php if (isset($Score)) echo 'Votre score est de :   ' . $Score["score"]; ?></td>
